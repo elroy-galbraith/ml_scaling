@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Random Forest Scaling Research - Project specific
+demo_results/
+sample_config.json
+demo_config.json
+results/
