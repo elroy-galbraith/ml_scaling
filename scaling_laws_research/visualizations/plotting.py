@@ -14,8 +14,6 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Union
 import warnings
 
-import sys
-from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from config import config
 from scaling_laws_research.analysis import PowerLawFitter, power_law_function, inverse_power_law_function
