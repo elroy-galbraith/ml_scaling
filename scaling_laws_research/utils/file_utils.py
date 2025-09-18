@@ -12,8 +12,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import logging
 
-import sys
-from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from config import config
 
