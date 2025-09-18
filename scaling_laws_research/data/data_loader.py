@@ -14,8 +14,6 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from typing import Tuple, Union, Optional, List
 import warnings
 
-import sys
-from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from config import config
 
