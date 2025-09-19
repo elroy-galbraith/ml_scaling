@@ -8,12 +8,14 @@ import json
 @dataclass
 class RandomForestConfig:
     """Configuration for Random Forest parameters."""
-    n_estimators: List[int] = field(default_factory=lambda: [10, 50, 100, 200])
-    max_depth: List[Optional[int]] = field(default_factory=lambda: [None, 5, 10, 20])
+    n_estimators: List[int] = field(default_factory=lambda: [10, 25, 50, 100, 200, 500, 1000])
+    max_depth: List[Optional[int]] = field(default_factory=lambda: [3, 5, 10, 15, 20, None])
     min_samples_split: List[int] = field(default_factory=lambda: [2, 5, 10])
     min_samples_leaf: List[int] = field(default_factory=lambda: [1, 2, 4])
     random_state: int = 42
     n_jobs: int = -1
+    n_random_seeds: int = 3
+    random_seeds: List[int] = field(default_factory=lambda: [42, 123, 456])
 
 
 @dataclass
@@ -23,10 +25,12 @@ class DataConfig:
     base_features: int = 20
     sample_scales: List[int] = field(default_factory=lambda: [1, 2, 4, 8, 16])
     feature_scales: List[int] = field(default_factory=lambda: [1, 2, 4, 8])
+    sample_sizes: List[int] = field(default_factory=lambda: [500, 1000, 2000, 5000, 10000, 20000, 38000])
     n_classes: int = 2
     task_type: str = "classification"  # "classification" or "regression"
     test_size: float = 0.2
     random_state: int = 42
+    dataset_name: str = "adult"  # "adult" or "synthetic"
 
 
 @dataclass
@@ -52,17 +56,21 @@ class ExperimentConfig:
                 'min_samples_split': self.random_forest.min_samples_split,
                 'min_samples_leaf': self.random_forest.min_samples_leaf,
                 'random_state': self.random_forest.random_state,
-                'n_jobs': self.random_forest.n_jobs
+                'n_jobs': self.random_forest.n_jobs,
+                'n_random_seeds': self.random_forest.n_random_seeds,
+                'random_seeds': self.random_forest.random_seeds
             },
             'data': {
                 'base_samples': self.data.base_samples,
                 'base_features': self.data.base_features,
                 'sample_scales': self.data.sample_scales,
                 'feature_scales': self.data.feature_scales,
+                'sample_sizes': self.data.sample_sizes,
                 'n_classes': self.data.n_classes,
                 'task_type': self.data.task_type,
                 'test_size': self.data.test_size,
-                'random_state': self.data.random_state
+                'random_state': self.data.random_state,
+                'dataset_name': self.data.dataset_name
             },
             'output_dir': self.output_dir,
             'save_models': self.save_models,
